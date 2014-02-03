@@ -6,7 +6,7 @@ email=$3
 github_token="$GITHUB_API_TOKEN"
 url_base=http://$EXTERNAL_HOSTNAME
 repo=$REPO
-host=$(hostname)
+host=$EXTERNAL_HOSTNAME
 build_url=""
 cd /var/ci
 postmark_token="$POSTMARK_API_TOKEN"

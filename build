@@ -10,7 +10,6 @@ ref=$1
 echo "building ref $1"
 fi
 
-SHARED_ROOT=/continuum-shared
 ROOT=/var/ci
 export PATH="$ROOT/rbenv/bin:$PATH"
 export RBENV_ROOT=$ROOT/rbenv
