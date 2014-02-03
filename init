@@ -1,0 +1,41 @@
+#!/bin/bash
+set -eu
+
+if [[ -z $EXTERNAL_HOSTNAME ]]
+then
+  echo "Please set EXTERNAL_HOSTNAME."
+  exit 1
+fi
+
+if [[ -z $POSTMARK_API_TOKEN ]]
+then
+  echo "Please set POSTMARK_API_TOKEN."
+  exit 1
+fi
+
+if [[ -z $GITHUB_API_TOKEN ]]
+then
+  echo "Please set GITHUB_API_TOKEN."
+  exit 1
+fi
+
+if [[ -z $GITHUB_SSH_KEY ]]
+then
+  echo "Please set GITHUB_SSH_KEY."
+  exit 1
+fi
+
+if [[ -z $GITHUB_SHARED_SECRET ]]
+then
+  echo "Please set GITHUB_SHARED_SECRET."
+  exit 1
+fi
+
+/etc/init.d/postgresql start
+
+# privsep is overrated, and so is logging
+su postgres -c 'redis-server' &> /dev/null &
+
+#exec rackup /continuum-shared/hook.ru
+su ci -c 'rackup /hook.ru' &
+exec bash
