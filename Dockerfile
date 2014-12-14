@@ -1,4 +1,4 @@
-from ubuntu:saucy
+from ubuntu:trusty
 
 add setup.sh /tmp/setup.sh
 run /tmp/setup.sh

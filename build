@@ -28,6 +28,7 @@ mkdir $build_dir
 which ruby
 ruby -v
 bundle -v
+go env
 
 cd $build_dir
 keyfile=$(mktemp)
