@@ -37,27 +37,5 @@ set -x
 ssh-agent bash -c 'ssh-add '$keyfile'; git clone git@github.com:'$REPO'.git .'
 rm -f $keyfile
 git reset --hard $ref
-bundle install --binstubs
 
-cat > config/database.yml <<END
-  development:
-    adapter: postgresql
-    database: ci_development
-    username: ci
-    encoding: utf8
-    min_messages: warning
-
-  test: &test
-    adapter: postgresql
-    database: ci_test
-    username: ci
-    encoding: utf8
-    min_messages: warning
-
-  cucumber:
-    <<: *test
-END
-dropdb ci_test || true
-createdb ci_test
-TZ="Europe/Berlin" RAILS_ENV=test bin/rake ci
-dropdb ci_test || true
+bin/qa-ci

@@ -33,8 +33,8 @@ fi
 
 /etc/init.d/postgresql start
 
-# privsep is overrated, and so is logging
-su postgres -c 'redis-server' &> /dev/null &
+# privsep is overrated
+redis-server &
 
 #exec rackup /continuum-shared/hook.ru
 su ci -c 'rackup /hook.ru' &

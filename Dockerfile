@@ -9,5 +9,6 @@ add hook /hook
 add build /build
 add hook.ru /hook.ru
 
+volume /var/ci
 expose 9292
 cmd /init
