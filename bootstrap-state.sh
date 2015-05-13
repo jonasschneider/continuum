@@ -13,8 +13,9 @@ su ci -c /bin/bash <<END
   export PATH="/var/ci/rbenv/bin:$PATH"
   export RBENV_ROOT=/var/ci/rbenv
   eval "\$(rbenv init -)"
-  rbenv install 2.1.0
-  rbenv global 2.1.0
+  rbenv install 2.1.5
+  rbenv global 2.1.5
+  rbenv rehash
   gem install bundler
   rbenv rehash
 END
