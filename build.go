@@ -29,7 +29,7 @@ func fetchScript(github_repo_name, rev string) (error, io.Reader) {
   req.Header.Add("Authorization", "token "+GithubApiToken)
   resp, err := c.Do(req)
   if err != nil { return err, nil }
-  if resp.StatusCode != 200 { return fmt.Errorf("failed to fetch file"), nil }
+  if resp.StatusCode != 200 { return fmt.Errorf("failed to fetch build script %s",EntrypointPath), nil }
 
   var f githubFile
 
@@ -41,8 +41,6 @@ func fetchScript(github_repo_name, rev string) (error, io.Reader) {
   if f.Content == "" {
     return fmt.Errorf("no build script %s found",EntrypointPath), nil
   }
-
-  log.Println(f.Content, resp)
 
   return nil, base64.NewDecoder(base64.StdEncoding, strings.NewReader(f.Content))
 }
