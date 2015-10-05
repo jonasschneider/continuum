@@ -38,6 +38,10 @@ func fetchScript(github_repo_name, rev string) (error, io.Reader) {
   err = json.Unmarshal(data, &f)
   if err != nil { return err, nil }
 
+  if f.Content == "" {
+    return fmt.Errorf("no build script %s found",EntrypointPath), nil
+  }
+
   return nil, base64.NewDecoder(base64.StdEncoding, strings.NewReader(f.Content))
 }
 
