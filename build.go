@@ -42,6 +42,8 @@ func fetchScript(github_repo_name, rev string) (error, io.Reader) {
     return fmt.Errorf("no build script %s found",EntrypointPath), nil
   }
 
+  log.Println(f.Content, resp)
+
   return nil, base64.NewDecoder(base64.StdEncoding, strings.NewReader(f.Content))
 }
 
