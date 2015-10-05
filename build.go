@@ -29,6 +29,7 @@ func fetchScript(github_repo_name, rev string) (error, io.Reader) {
   req.Header.Add("Authorization", "token "+GithubApiToken)
   resp, err := c.Do(req)
   if err != nil { return err, nil }
+  if resp.StatusCode != 200 { return err, nil }
 
   var f githubFile
 

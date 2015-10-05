@@ -26,7 +26,7 @@ func reportBuildFailure(github_repo_name, ref, rev, email string, res BuildResul
     debuglog = string(logOut)
   }
   body := "error: "+res.Error.Error()+"\n\n"+urlstr+debuglog
-  subj := fmt.Sprintf("[ci: %s] %s failed", strings.Replace(ref, "refs/heads", "", 1), rev)
+  subj := fmt.Sprintf("[ci: %s] %s failed", strings.Replace(ref, "refs/heads/", "", 1), rev)
   err := sendMail(Mail{TextBody: body, To: email, Subject: subj})
   if err != nil {
     log.Println("error while sending failure notification:",err)
