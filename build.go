@@ -56,6 +56,11 @@ func fetchScript(github_repo_name, rev string) (error, io.Reader) {
 }
 
 func runBuild(github_repo_name, rev string) BuildResult {
+	err = os.MkdirAll(RootPath+"/log", 0777)
+	if err != nil {
+		return BuildResult{Error: err}
+	}
+
 	// fail immediately if duplicate
 	build_name := fmt.Sprintf("%d-%s", time.Now().Unix(), rev)
 	diagLogfile, err := os.Create(RootPath + "/log/" + build_name + ".log")
@@ -92,11 +97,6 @@ func runBuild(github_repo_name, rev string) BuildResult {
 	teedOut := io.TeeReader(output, os.Stderr)
 
 	err = cmd.Start()
-	if err != nil {
-		return BuildResult{Error: err}
-	}
-
-	err = os.MkdirAll(RootPath+"/log", 0777)
 	if err != nil {
 		return BuildResult{Error: err}
 	}
